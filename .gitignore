@@ -29,3 +29,6 @@ replay_pid*
 *.odt
 *.pdf
 *.odt*
+
+# idea
+.idea/
