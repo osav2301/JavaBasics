@@ -5,6 +5,25 @@ public class Course {
     private String title;
     private int durationHours;
     private int completedHours;
+    private Level level;
+
+    public Course(long id, String title, int durationHours, int completedHours, Level level)
+    {
+        if (id > 0)
+            this.id = id;
+        else
+            System.out.println("ERR");
+
+        if (!title.isBlank())
+            this.title = title.trim();
+
+        if (durationHours >= 1 && durationHours <= 1000)
+            this.durationHours = durationHours;
+
+        if (completedHours < durationHours && completedHours >= 0)
+            this.completedHours = completedHours;
+        this.level = level;
+    }
 
     public Course(long id, String title, int durationHours, int completedHours)
     {
@@ -13,14 +32,15 @@ public class Course {
         else
             System.out.println("ERR");
 
-        if (!title.isBlank() && !title.isEmpty())
+        if (!title.isBlank())
             this.title = title.trim();
 
-        if (durationHours >= 1 && durationHours <= 100)
+        if (durationHours >= 1 && durationHours <= 1000)
             this.durationHours = durationHours;
 
         if (completedHours < durationHours && completedHours >= 0)
             this.completedHours = completedHours;
+        this.level = Level.BASIC;
     }
 
     public Course(long id, String title, int durationHours)
@@ -30,15 +50,19 @@ public class Course {
         else
             System.out.println("ERR");
 
-        if (!title.isBlank() && !title.isEmpty())
+        if (!title.isBlank())
             this.title = title.trim();
 
-        if (durationHours >= 1 && durationHours <= 300)
+        if (durationHours >= 1 && durationHours <= 1000)
             this.durationHours = durationHours;
 
         this.completedHours = 0;
+        this.level = Level.BASIC;
     }
 
+    public Level level(){
+        return this.level;
+    }
     public long id()
     {
         return this.id;
