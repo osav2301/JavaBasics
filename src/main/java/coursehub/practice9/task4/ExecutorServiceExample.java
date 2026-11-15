@@ -2,8 +2,6 @@ package coursehub.practice9.task4;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -26,13 +24,13 @@ public class ExecutorServiceExample {
     private static final int TASK_COUNT = 10;
     private static final String POISON = "POISON";
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
         BlockingQueue<String> queue = new ArrayBlockingQueue<>(QUEUE_CAPACITY);
 
         int poolSize = 2 * Runtime.getRuntime().availableProcessors();
         int consumerCount = poolSize;
-        int producerCount = poolSize / 4;
+        int producerCount = 2;
 
         ThreadFactory workerFactory = namedFactory("worker");
         ThreadFactory producerFactory = namedFactory("producer");
@@ -64,7 +62,7 @@ public class ExecutorServiceExample {
                                 Thread.currentThread().getName(),
                                 task,
                                 queue.size());
-                        Thread.sleep(300);
+                        Thread.sleep(30);
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -72,7 +70,7 @@ public class ExecutorServiceExample {
                 } finally {
                     Thread.interrupted();
                     try {
-                        for (int i = 0; i < consumerCount; i++)
+                        for (int i = 0; i < consumerCount / producerCount; i++)
                             queue.put(POISON);
                     } catch (InterruptedException ignored) {
                         Thread.currentThread().interrupt();
@@ -115,7 +113,7 @@ public class ExecutorServiceExample {
                 System.err.println("producer не завершился за 5с → shutdownNow");
                 producers.shutdownNow();
             }
-            if (!consumers.awaitTermination(10, TimeUnit.SECONDS)) {
+            if (!consumers.awaitTermination(20, TimeUnit.SECONDS)) {
                 System.err.println("consumers не завершились за 10с → shutdownNow");
                 consumers.shutdownNow();
             }

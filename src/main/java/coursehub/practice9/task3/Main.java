@@ -18,7 +18,7 @@ public class Main {
         Thread[] threads = new Thread[10];
         for (int i = 0; i < 10; i++) {
             threads[i] = new Thread(() -> {
-                for (int j = 0; j < 110; j++) {
+                for (int j = 0; j < 11; j++) {
                     sessions.putIfAbsent(students[(int)(Math.random() * 100)], Instant.now());
                 }
             });

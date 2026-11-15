@@ -65,5 +65,6 @@ public class BlockingQueueExample {
         consumerThread2.join();
         producerThread2.join();
         System.out.println("Done");
+        System.out.println(queue.isEmpty());
     }
 }
