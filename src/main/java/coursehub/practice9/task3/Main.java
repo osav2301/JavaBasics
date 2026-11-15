@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Main {
     public static void main(String[] args) throws InterruptedException
     {
-        Student[] students = new Student[10000];
-        for (int i = 0; i < 10000; i++) {
+        Student[] students = new Student[100];
+        for (int i = 0; i < 100; i++) {
             students[i] = new Student((int)(Math.random() * 100), "");
         }
 
@@ -18,8 +18,8 @@ public class Main {
         Thread[] threads = new Thread[10];
         for (int i = 0; i < 10; i++) {
             threads[i] = new Thread(() -> {
-                for (int j = 0; j < 1010; j++) {
-                    sessions.putIfAbsent(students[(int)(Math.random() * 10000)], Instant.now());
+                for (int j = 0; j < 110; j++) {
+                    sessions.putIfAbsent(students[(int)(Math.random() * 100)], Instant.now());
                 }
             });
         }
