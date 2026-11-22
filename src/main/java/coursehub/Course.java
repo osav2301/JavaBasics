@@ -60,7 +60,8 @@ public class Course {
         this.level = Level.BASIC;
     }
 
-    public Level level(){
+    public Level level()
+    {
         return this.level;
     }
     public long id()
@@ -94,6 +95,12 @@ public class Course {
         } else {
             this.completedHours += hours;
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.id() + " | " + this.title() + " | " + this.remainingHours() + "h left";
     }
 
     public static void main(String[] args)

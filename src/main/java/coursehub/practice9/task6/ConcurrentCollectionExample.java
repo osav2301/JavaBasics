@@ -37,6 +37,11 @@ public class ConcurrentCollectionExample {
                             curSize.decrementAndGet();
                         }
                     }
+                    if (curSize.incrementAndGet() <= CAPACITY) {
+                        if (enroll(enrolledStudents, lcourse, students[0]) != null) {
+                            curSize.decrementAndGet();
+                        }
+                    }
                 }
             });
         }

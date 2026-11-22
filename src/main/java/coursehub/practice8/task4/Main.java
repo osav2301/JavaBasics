@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Main {
     public static Map<Level, LevelSummary> summarizeByLevel(List<Course> courses)
     {
-        Map<Level, LevelSummary> map =  courses.stream().collect(Collectors.groupingBy(
+        Map<Level, LevelSummary> map = courses.stream().collect(Collectors.groupingBy(
                 Course::level,
                 TreeMap::new,
                 Collectors.collectingAndThen(
@@ -20,7 +20,6 @@ public class Main {
         for (Level level : Level.values()) {
             map.putIfAbsent(level, new LevelSummary(0, 0.0));
         }
-
 
         return map;
     }
